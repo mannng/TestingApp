@@ -1,4 +1,4 @@
-name: React Native CI
+name: Expo CI
 
 on:
   push:
@@ -13,34 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Use the Node.js version required by your project
+          node-version: 18
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run tests (if applicable)
-      - name: Run tests
-        run: npm test
-        timeout-minutes: 10 # Set a timeout for the step
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
 
-      # Build the app (Android)
-      - name: Build Android app
-        run: |
-          cd android
-          ./gradlew assembleRelease
-
-      # Build the app (iOS)
-      - name: Build iOS app
-        run: |
-          cd ios
-          pod install
-          xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphonesimulator -configuration Release
+      - name: Build Android
+        run: expo build:android
+        env:
+          EXPO_TOKEN: j5Auhlfq5Miw3euaOIjJYUZzRc8Dz07IA8Qyt8cK
