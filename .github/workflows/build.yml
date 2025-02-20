@@ -27,11 +27,7 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Login to Expo
-        run: eas login --token j5Auhlfq5Miw3euaOIjJYUZzRc8Dz07IA8Qyt8cK
-
-      - name: Build Android
-        run: eas build --platform android
-
-      - name: Build iOS
-        run: eas build --platform ios
+      - name: Build with EAS
+        run: eas build --platform all
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} # Use the EXPO_TOKEN environment variable
