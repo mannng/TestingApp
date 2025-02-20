@@ -19,15 +19,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install Expo CLI
-        run: npm install -g expo-cli
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Login to Expo
+        run: eas login --token j5Auhlfq5Miw3euaOIjJYUZzRc8Dz07IA8Qyt8cK
 
       - name: Build Android
-        run: expo build:android
-        env:
-          EXPO_TOKEN: j5Auhlfq5Miw3euaOIjJYUZzRc8Dz07IA8Qyt8cK
+        run: eas build --platform android
+
+      - name: Build iOS
+        run: eas build --platform ios
