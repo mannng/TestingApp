@@ -30,6 +30,7 @@ jobs:
       # Run tests (if applicable)
       - name: Run tests
         run: npm test
+        timeout-minutes: 10 # Set a timeout for the step
 
       # Build the app (Android)
       - name: Build Android app
